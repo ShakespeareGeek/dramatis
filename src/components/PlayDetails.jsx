@@ -3,12 +3,30 @@ import { useEffect, useState } from "react";
 import Disclaimer from './Disclaimer';
 import PlayLinks from './PlayLinks';
 import AdBlock from "./AdBlock";
-
+import ShareButtons
+ from "./ShareButtons";
 const PlayDetails = () => {
   const { short_name } = useParams();
   const [play, setPlay] = useState(null);
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true); // New loading state
+
+  useEffect(() => {
+    if (play) {
+      // Set the document title and meta description
+      document.title = `${play.title} Summary - ShakespeareGeek.com`;
+      const metaTag = document.querySelector("meta[name='description']");
+      if (metaTag) {
+        metaTag.setAttribute("content", play.metaDescription);
+      } else {
+        // If the <meta> tag doesn't exist, create it
+        const newMetaTag = document.createElement("meta");
+        newMetaTag.name = "description";
+        newMetaTag.content = play.metaDescription;
+        document.head.appendChild(newMetaTag);
+      }
+    }
+  }, [play]);
 
   useEffect(() => {
     setLoading(true); // Start loading
@@ -108,6 +126,8 @@ const PlayDetails = () => {
         >
           Jump to Character List
         </a>
+        <ShareButtons title={ `All About ${play.title}` } />
+          
         <div
           className="prose prose-lg mx-auto text-center text-gray-700 mb-8"
           dangerouslySetInnerHTML={{ __html: play.summary }}

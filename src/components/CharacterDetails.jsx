@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import Disclaimer from './Disclaimer';
 import AdBlock from "./AdBlock.jsx";
 import PlayLinks from "./PlayLinks.jsx";
-
+import ShareButtons from "./ShareButtons.jsx";
+import SocialImage from "./SocialImage.jsx";
 const CharacterDetails = () => {
   const { slug } = useParams();
   const [character, setCharacter] = useState(null);
@@ -68,7 +69,7 @@ const CharacterDetails = () => {
             {character.name}
           </h1>
           <PlayLinks short_name={character.play.short_name} />
-
+          <ShareButtons title={ `All About ${character.name}` } />
           <div className="hidden md:block float-right w-1/4 p-4 ">
             <AdBlock />
           </div>
@@ -88,7 +89,8 @@ const CharacterDetails = () => {
         </div>
       </div>
       <Disclaimer />
-    </>
+      <SocialImage />
+      </>
   );
 };
 
