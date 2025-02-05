@@ -124,7 +124,7 @@ const CharacterDetails = () => {
             to={`/shakespeare_plays/${character.play.short_name}.html`}
             className="text-blue-500 hover:underline"
           >
-            Return to {character.play.title} Play Analysis
+            Return to <em>{character.play.title}</em> Play Analysis
           </Link>
         </div>
       </div>

@@ -37,7 +37,7 @@ const PlayLinks = ({ play, short_name }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {currentPlay.title} Posts on {siteName}
+            <em>{currentPlay.title}</em> Posts on {siteName}
           </a>
         )}
 
@@ -54,7 +54,7 @@ const PlayLinks = ({ play, short_name }) => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            {currentPlay.title} Merchandise
+            <em>{currentPlay.title}</em> Merchandise
           </a>
         )}
       </div>

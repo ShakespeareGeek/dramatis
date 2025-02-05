@@ -118,7 +118,7 @@ const PlayDetails = () => {
   return (
     <>
       <div className="p-8 bg-gray-50 min-h-screen">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">{play.title}</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4"><em>{play.title}</em></h1>
         <PlayLinks play={play} />
                 {/* Jump to Characters Link */}
         <a
