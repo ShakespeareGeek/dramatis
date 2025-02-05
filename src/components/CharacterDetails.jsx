@@ -5,6 +5,8 @@ import AdBlock from "./AdBlock.jsx";
 import PlayLinks from "./PlayLinks.jsx";
 import ShareButtons from "./ShareButtons.jsx";
 import SocialImage from "./SocialImage.jsx";
+const siteUrl = import.meta.env.VITE_HOMEPAGE_URL || 'Your Site Ur';
+
 const CharacterDetails = () => {
   const { slug } = useParams();
   const [character, setCharacter] = useState(null);
@@ -13,7 +15,7 @@ const CharacterDetails = () => {
   useEffect(() => {
     if (character) {
       // Set the document title and meta description
-      document.title = `${character.name} - ${character.play.title}`;
+      document.title = `${character.name} in ${character.play.title} | Shakespeare Character Analysis`;
       const metaTag = document.querySelector("meta[name='description']");
       if (metaTag) {
         metaTag.setAttribute("content", character.meta_description);
@@ -22,8 +24,46 @@ const CharacterDetails = () => {
         const newMetaTag = document.createElement("meta");
         newMetaTag.name = "description";
         newMetaTag.content = character.meta_description;
+
+        // og:title - The title of your page
+        newMetaTag.setAttribute("property", "og:title");
+        newMetaTag.content = `${character.name} in ${character.play.title}`;
+
+        // og:type - Most appropriate for your content would be "article"
+        newMetaTag.setAttribute("property", "og:type");
+        newMetaTag.content = "article";
+
+        // og:url - The canonical URL
+        newMetaTag.setAttribute("property", "og:url");
+        newMetaTag.content = `${siteUrl}/shakespeare_characters/${character.slug}.html`;
+
+        // og:description
+        newMetaTag.setAttribute("property", "og:description");
+        newMetaTag.content = character.meta_description;
         document.head.appendChild(newMetaTag);
       }
+
+      // Twitter title
+      const twitterTitle = document.querySelector("meta[name='twitter:title']");
+      if (twitterTitle) {
+        twitterTitle.setAttribute("content", `${character.name} in ${character.play.title}`);
+      } else {
+        const newTwitterTitle = document.createElement("meta");
+        newTwitterTitle.name = "twitter:title";
+        newTwitterTitle.content = `${character.name} in ${character.play.title}`;
+        document.head.appendChild(newTwitterTitle);
+      }
+
+      // Twitter description
+      const twitterDesc = document.querySelector("meta[name='twitter:description']");
+      if (twitterDesc) {
+        twitterDesc.setAttribute("content", character.meta_description);
+      } else {
+        const newTwitterDesc = document.createElement("meta");
+        newTwitterDesc.name = "twitter:description";
+        newTwitterDesc.content = character.meta_description;
+        document.head.appendChild(newTwitterDesc);
+      }     
     }
   }, [character]);
 
@@ -84,7 +124,7 @@ const CharacterDetails = () => {
             to={`/shakespeare_plays/${character.play.short_name}.html`}
             className="text-blue-500 hover:underline"
           >
-            Back to {character.play.title}
+            Return to {character.play.title} Play Analysis
           </Link>
         </div>
       </div>

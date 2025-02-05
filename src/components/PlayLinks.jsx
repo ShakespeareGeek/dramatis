@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 const PlayLinks = ({ play, short_name }) => {
   const [fetchedPlay, setFetchedPlay] = useState(null);
   const siteName = import.meta.env.VITE_SITE_NAME || 'Your Site Name';
+  const siteUrl = import.meta.env.VITE_HOMEPAGE_URL || 'Your Site URL';
 
   useEffect(() => {
     if (!play && short_name) {
@@ -31,12 +32,12 @@ const PlayLinks = ({ play, short_name }) => {
         {/* Link to category */}
         {currentPlay.category && (
           <a
-            href={`https://www.shakespearegeek.com/category/${currentPlay.category}`}
+            href={`${siteUrl}/${currentPlay.category}`}
             className="text-blue-500 hover:underline text-sm"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {currentPlay.title} Posts on Shakespeare Geek
+            {currentPlay.title} Posts on {siteName}
           </a>
         )}
 

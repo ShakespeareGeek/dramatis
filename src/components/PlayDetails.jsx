@@ -10,11 +10,12 @@ const PlayDetails = () => {
   const [play, setPlay] = useState(null);
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true); // New loading state
+  const siteName = import.meta.env.VITE_SITE_NAME || 'Your Site Name';
 
   useEffect(() => {
     if (play) {
       // Set the document title and meta description
-      document.title = `${play.title} Summary - ShakespeareGeek.com`;
+      document.title = `${play.title} Summary - ${siteName}`;
       const metaTag = document.querySelector("meta[name='description']");
       if (metaTag) {
         metaTag.setAttribute("content", play.metaDescription);
