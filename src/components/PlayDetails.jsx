@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Disclaimer from './Disclaimer';
 import PlayLinks from './PlayLinks';
-import AdBlock from "./AdBlock";
+import AdBlockBanner from "./AdBlockBanner";
 import ShareButtons
  from "./ShareButtons";
 const PlayDetails = () => {
@@ -167,7 +167,7 @@ const PlayDetails = () => {
           className="prose prose-lg mx-auto text-center text-gray-700 mb-8"
           dangerouslySetInnerHTML={{ __html: play.summary }}
         ></div>
-        <AdBlock />
+        <AdBlockBanner />
 
         <h2 id="characters" className="text-2xl font-semibold text-gray-800 mb-4">Characters</h2>
         <a

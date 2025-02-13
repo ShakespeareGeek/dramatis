@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AdBlock from "./AdBlock";
+import AdBlockBanner from "./AdBlockBanner";
 
 const PlayList = () => {
   const [plays, setPlays] = useState([]);
@@ -15,6 +15,7 @@ const PlayList = () => {
     
     <div className="p-4">
       <h1 className="text-4xl font-bold center mb-4">The Plays of William Shakespeare</h1>
+      <AdBlockBanner />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {plays.map((play) => (
           <div key={play.id} className="p-4 bg-white rounded-2xl shadow-2xl">
@@ -33,7 +34,7 @@ const PlayList = () => {
           </div>
         ))}
       </div>
-      <AdBlock/>
+      <AdBlockBanner />
     </div>
   );
 };
