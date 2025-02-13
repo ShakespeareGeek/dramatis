@@ -98,7 +98,7 @@ const CharacterList = () => {
           to={`/shakespeare_plays/${char.play.short_name}.html`}
           className="text-green-600 hover:underline"
         >
-          {char.play.title}
+          <em>{char.play.title}</em>
         </Link>
       </p>
     </li>

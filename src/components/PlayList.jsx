@@ -18,7 +18,7 @@ const PlayList = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {plays.map((play) => (
           <div key={play.id} className="p-4 bg-white rounded-2xl shadow-2xl">
-            <h2 className="text-xl font-bold mb-2">{play.title}</h2>
+            <h2 className="text-xl font-bold mb-2"><em>{play.title}</em></h2>
             <p
               className="text-gray-700 text-sm mb-4"
               dangerouslySetInnerHTML={{

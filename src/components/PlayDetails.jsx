@@ -13,20 +13,55 @@ const PlayDetails = () => {
 
   useEffect(() => {
     if (play) {
-      // Set the document title and meta description
-      document.title = `${play.title} Summary - ShakespeareGeek.com`;
-      const metaTag = document.querySelector("meta[name='description']");
-      if (metaTag) {
-        metaTag.setAttribute("content", play.metaDescription);
+      // Title and meta description
+      document.title = `${play.title} | Shakespeare Play Summary & Analysis`;
+      
+      // Meta description
+      const metaDescription = play.metaDescription;
+      setOrCreateMetaTag('description', metaDescription);
+   
+      // JSON-LD Schema
+      const schema = {
+        "@context": "https://schema.org",
+        "@type": "Play", 
+        "name": play.title,
+        "author": {
+          "@type": "Person",
+          "name": "William Shakespeare"
+        },
+        "url": window.location.href
+      };
+   
+      const existingSchema = document.querySelector('script[type="application/ld+json"]');
+      if (existingSchema) {
+        existingSchema.textContent = JSON.stringify(schema);
       } else {
-        // If the <meta> tag doesn't exist, create it
-        const newMetaTag = document.createElement("meta");
-        newMetaTag.name = "description";
-        newMetaTag.content = play.metaDescription;
-        document.head.appendChild(newMetaTag);
+        const scriptTag = document.createElement('script');
+        scriptTag.type = 'application/ld+json';
+        scriptTag.text = JSON.stringify(schema);
+        document.head.appendChild(scriptTag);
       }
+
+       // Add keywords meta tag
+      const keywords = play.keywords ? play.keywords.join(', ') : 
+        `${play.title}, Shakespeare, play, drama, ${play.type}, analysis, summary, characters`;
+      setOrCreateMetaTag('keywords', keywords);
+
     }
-  }, [play]);
+   }, [play]);
+   
+   // Helper function to set or create meta tags
+   function setOrCreateMetaTag(name, content) {
+    const tag = document.querySelector(`meta[name='${name}']`);
+    if (tag) {
+      tag.setAttribute('content', content);
+    } else {
+      const newTag = document.createElement('meta');
+      newTag.name = name;
+      newTag.content = content;
+      document.head.appendChild(newTag);
+    }
+   }
 
   useEffect(() => {
     setLoading(true); // Start loading
@@ -117,7 +152,7 @@ const PlayDetails = () => {
   return (
     <>
       <div className="p-8 bg-gray-50 min-h-screen">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">{play.title}</h1>
+        <h1 className="text-4xl font-bold text-gray-800 mb-4"><em>{play.title}</em></h1>
         <PlayLinks play={play} />
                 {/* Jump to Characters Link */}
         <a
